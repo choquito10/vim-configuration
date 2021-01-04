@@ -1,112 +1,90 @@
-# vim-configuration
-
-set number 
-" activar el clipboard 
+#vim
+set number
+set updatetime=300
+set shortmess+=c
+set numberwidth=1
 set clipboard=unnamed
-" espacios que hace al precionar tab
-set tabstop=2
-syntax enable 
+syntax enable
+set showcmd
 set encoding=utf-8
-set mouse=a
-" tamaño de los espacios 
+set showmatch
 set sw=2 
-set relativenumber 
-set bg=dark 
-" identar con buena manera
-set breakindent
-set smartindent 
-" fondo blanco donde esta el cursor
-set cul 
-" colorear la palabra que se encontro en la busqueda
-set hlsearch 
-" buscar como buscan los browsers
-set incsearch 
-" no mostrar la posicion del cursor
-set noru
-" mostrar en el titulo de la terminal en que archivo estamos
-set title
-" abrir archivo a la derecha
-set splitright
-" muestra el autocompletado de la barra de comandos 
-set wildmenu
-set wildmode=longest:list,full
-" Muestra siempre la barra de estado de vim
 set laststatus=2
-" los tres de abajo evitan guardar copias del archivo que se esta editando
+set noshowmode
+set bg=dark
+set ignorecase                
+set tabstop=2 
+set breakindent 
+set smartindent
+set cul
+set hlsearch
+set incsearch
+set wildmenu 
+set wildmode=longest:list,full
 set nobackup 
-set noswapfile
+set noswapfile 
 set nowritebackup
-" usar regex
 set magic
-" avisar de cambios sin guardar
 set confirm
-" evitar el tiempo de espera al oprimir el espacio
 set timeoutlen=150
-" no dejar los buffers abiertos
-set hidden
+set cmdheight=1
+
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'atahabaki/archman-vim' " tema 
+Plug 'morhetz/gruvbox' "tema
 Plug 'scrooloose/nerdtree' " ver directorios al lado 
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocompletado
-Plug 'tpope/vim-commentary' " comentarios 
-Plug 'prettier/vim-prettier', { 'do': 'npm install' } " prettier
-Plug 'jiangmiao/auto-pairs' " cerrar comillas automaticamente
-Plug 'alvan/vim-closetag' " cerrar tags automaticamente 
+Plug 'jiangmiao/auto-pairs' " cerrar comillas automaticamente 
+Plug 'alvan/vim-closetag' " cerrar tags automaticamente
+Plug 'valloric/youcompleteme' "autocompletado
+Plug 'mg979/vim-visual-multi', {'branch': 'master'} " muchos cursores
+Plug 'prettier/vim-prettier', { 'do': 'npm install' } " formateador
 
 call plug#end()
 
-" color de schema de tema
-colorscheme archman
 
-" tecla de atajos 
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = "hard"
+
 let mapleader=" "
 
-" cerrar carpetas de al lado al elegir un archivo
-let NERDTreeQuitOnOpen=1 
+let NERDTreeQuitOnOpen=1
+let NERDTreeAutoDeleteBuffer=1
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+let NERDTreeShowLineNumbers=1
+let NERDTreeMapOpenInTab='<ENTER>'
 
-" quitar aviso de errores prettier
-let g:prettier#quickfix_enabled=0
+nmap <leader>c :NERDTreeFind<ENTER>
 
-" formatear al guardar
-autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+nmap 0 :tabn <CR>
+nmap 9 :tabp <CR>
+nmap . :tabm + <CR>
+nmap , :tabm - <CR>
 
-" formatear con comillas simples
-let g:prettier#config#config_precedence = 'file-override'
-let g:prettier#config#single_quote = 'true'
-
-" cuando formatea deje 2 espacios
-let g:prettier#config#tab_width = 2 
-
-" usar espacios en vez de tabs 
-let g:prettier#config#use_tabs = 'false'
-
-" cerrar tags automatico para esas extensiones
-let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
-
-" tab para bajar en las  opciones
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-
-" moverse entre las pestañas
-nmap 0 :tabn<CR>
-nmap 9 :tabp<CR>
-
-" mover las pestañas para izquierda o derecha
-nmap . :tabm +<CR>
-nmap , :tabm -<CR>
-
-" buscar archivo y abrirlo en nueva tab
-nmap <leader>s :tabfind
-
-nmap <leader>c :NERDTreeFind<CR>
-nmap <leader>w :w<CR>
-nmap <leader>q  :q<CR>
-imap <leader>i <ESC>
-xmap <leader>i <ESC>
-cmap <leader>i <ESC>
+nmap <leader>w :w<ENTER> 
+imap <Space>i <Esc>
+cnoremap <Space>i <Esc>
+onoremap <Space>i <Esc>
+xnoremap <Space>i <Esc>
+nmap <leader>q :q<ENTER>
 nmap <leader>f /
-nmap <leader>l :wincmd l<CR>
-nmap <leader>h :wincmd h<CR>
-nmap <leader>k :wincmd k<CR>
-nmap <leader>j :wincmd j<CR>
+nmap <leader>l :wincmd l<ENTER> 
+nmap <leader>h :wincmd h<ENTER> 
+nmap <leader>k :wincmd k<ENTER> 
+nmap <leader>j :wincmd j<ENTER> 
+nmap <leader>b <C-v>
+
+
+" cambiar el modo del puntero segun el modo
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+let &t_SR = "\e[4 q"
+
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_path = "~/path/to/cli/prettier"
+let g:prettier#config#single_quote = 'true'
+let g:prettier#quickfix_enabled=0
+let g:prettier#config#trailing_comma = 'all'
+let g:prettier#config#print_width = 80
