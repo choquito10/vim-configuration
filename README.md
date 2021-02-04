@@ -109,3 +109,40 @@ augroup THE_PRIMEAGEN
     " autocmd VimEnter * :VimApm
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
+
+
+" mostrar documentacion de los metodos y funciones
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+if (index(['vim','help'], &filetype) >= 0)
+execute 'h '.expand('<cword>')
+else
+call CocAction('doHover')
+endif
+endfunction
+
+
+" Remove  flechas in Command Mode
+cnoremap <Down> <Nop>
+cnoremap <Left> <Nop>
+cnoremap <Right> <Nop>
+cnoremap <Up> <Nop>
+
+" Remove flechas in Insert Mode
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+
+" Remove flechas in Normal Mode
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+
+" Remove flechas in Visual Mode
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Up> <Nop>
