@@ -1,17 +1,17 @@
+syntax enable
+filetype off
 set number
-set nocompatible
 set exrc
+set ruler
+set nocompatible
 set belloff=all
 set signcolumn=yes
 set relativenumber
-set nohlsearch
-set updatetime=300
+set updatetime=50
 set shortmess+=c
-set numberwidth=1
 set clipboard=unnamed
-syntax enable
-set showcmd
 set encoding=utf-8
+set showcmd
 set showmatch
 set sw=2
 set laststatus=2
@@ -19,18 +19,17 @@ set scrolloff=15
 set noshowmode
 set bg=dark
 set tabstop=2
-set breakindent
-set smartindent
-set cul
+set cursorline
 set incsearch
+set breakindent
 set wrap
+set tw=90
 set wildmenu
 set wildmode=longest:list,full
 set nobackup
 set noswapfile
 set nowritebackup
 set hidden
-set magic
 set timeoutlen=150
 set cmdheight=1
 set path+=**
@@ -44,6 +43,7 @@ Plug 'jiangmiao/auto-pairs' " cerrar comillas automaticamente
 Plug 'alvan/vim-closetag' " cerrar tags automaticamente
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} " muchos cursores
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocompletado
+Plug 'honza/vim-snippets' " atajos de teclado
 
 call plug#end()
 
@@ -58,15 +58,14 @@ let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 let NERDTreeShowLineNumbers=1
 let NERDTreeMapOpenInTab='<tab>'
-
+let NERDTreeShowHidden=1
 
 let g:javascript_plugin_flow = 1
 
-
 nmap <leader>c :NERDTreeFind<ENTER>
 
-nmap ' :tabn <CR>
-nmap ¡ :tabp <CR>
+nmap ¡ :tabn <CR>
+nmap ' :tabp <CR>
 nmap - :tabm + <CR>
 nmap , :tabm - <CR>
 
@@ -88,6 +87,12 @@ nmap <leader>b <C-v>
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 let &t_SR = "\e[4 q"
+
+" coc
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+
 
 " usar tab para elegir opcion
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
