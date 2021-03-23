@@ -1,5 +1,4 @@
-syntax enable
-filetype off
+syntax on
 set number
 set exrc
 set ruler
@@ -7,7 +6,7 @@ set nocompatible
 set belloff=all
 set signcolumn=yes
 set relativenumber
-set updatetime=50
+set updatetime=300
 set shortmess+=c
 set clipboard=unnamed
 set encoding=utf-8
@@ -32,18 +31,16 @@ set nowritebackup
 set hidden
 set timeoutlen=150
 set cmdheight=1
-set path+=**
 
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox' "tema
 Plug 'scrooloose/nerdtree' " ver directorios al lado
-Plug 'jiangmiao/auto-pairs' " cerrar comillas automaticamente
-Plug 'alvan/vim-closetag' " cerrar tags automaticamente
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} " muchos cursores
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocompletado
-Plug 'honza/vim-snippets' " atajos de teclado
+Plug 'honza/vim-snippets' " atajos
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -60,8 +57,6 @@ let NERDTreeShowLineNumbers=1
 let NERDTreeMapOpenInTab='<tab>'
 let NERDTreeShowHidden=1
 
-let g:javascript_plugin_flow = 1
-
 nmap <leader>c :NERDTreeFind<ENTER>
 
 nmap ¡ :tabn <CR>
@@ -76,12 +71,14 @@ onoremap <Space>i <Esc>
 xnoremap <Space>i <Esc>
 nmap <leader>q :q<ENTER>
 nmap <leader>f /
-nmap <leader>s :tabf
 nmap <leader>l :wincmd l<ENTER>
 nmap <leader>h :wincmd h<ENTER>
 nmap <leader>k :wincmd k<ENTER>
 nmap <leader>j :wincmd j<ENTER>
 nmap <leader>b <C-v>
+
+" run current file in node
+nnoremap <Leader>x :!node %<cr>
 
 " cambiar el modo del puntero segun el modo
 let &t_SI = "\e[6 q"
@@ -90,18 +87,17 @@ let &t_SR = "\e[4 q"
 
 " coc
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-
+nmap <silent> gr <Plug>(coc-references)
 
 " usar tab para elegir opcion
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
+
 " usar enter para seleccionar opcion de menu
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " quitar los espacios extras al guardar
-
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -117,7 +113,6 @@ augroup END
 
 
 " mostrar documentacion de los metodos y funciones
-
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
 if (index(['vim','help'], &filetype) >= 0)
@@ -151,6 +146,7 @@ vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <Up> <Nop>
+
 
 
 " extensiones coc
