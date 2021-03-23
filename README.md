@@ -151,3 +151,26 @@ vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <Up> <Nop>
+
+
+" extensiones coc
+coc-snippets coc-prettier coc-html coc-git coc-emmet coc-tsserver coc-json coc-css
+
+" coc-settings.json 'CocConfig
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "json",
+    "javascript",
+    "javascriptreact",
+    "html"
+  ],
+  "prettier.printWidth": 90,
+  "prettier.singleQuote": true,
+  "prettier.disableSuccessMessage": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.proseWrap": "always",
+  "diagnostic.level": "information"
+}
